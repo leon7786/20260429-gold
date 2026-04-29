@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+
+# Local runtime
+*.log
+nohup.out
+
+# Huge artifacts / generated outputs
+backtest_results/
+charts/
+charts_multisource/
+
+# Keep raw data local by default (too large/sensitive)
+data/
+data_extra_1990/
+data_long_history/
+data_multisource/
+alt_sources/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store

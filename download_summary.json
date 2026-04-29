@@ -1,0 +1,117 @@
+{
+  "requested_start": "1990-01-01",
+  "requested_end": "2026-04-28",
+  "generated_at_utc": "2026-04-28T13:02:43.646275Z",
+  "assets": [
+    {
+      "asset": "usd_dxy",
+      "ticker": "DX-Y.NYB",
+      "name": "US Dollar Index (DXY)",
+      "status": "ok",
+      "rows": 9255,
+      "start": "1990-01-01",
+      "end": "2026-04-27",
+      "csv": "/root/project/20260428-10gold/data/usd_dxy.csv",
+      "chart": "/root/project/20260428-10gold/charts/usd_dxy.png"
+    },
+    {
+      "asset": "us10y_yield",
+      "ticker": "^TNX",
+      "name": "US 10Y Treasury Yield",
+      "status": "ok",
+      "rows": 9115,
+      "start": "1990-01-02",
+      "end": "2026-04-27",
+      "csv": "/root/project/20260428-10gold/data/us10y_yield.csv",
+      "chart": "/root/project/20260428-10gold/charts/us10y_yield.png"
+    },
+    {
+      "asset": "sp500",
+      "ticker": "^GSPC",
+      "name": "S&P 500 Index",
+      "status": "ok",
+      "rows": 9146,
+      "start": "1990-01-02",
+      "end": "2026-04-27",
+      "csv": "/root/project/20260428-10gold/data/sp500.csv",
+      "chart": "/root/project/20260428-10gold/charts/sp500.png"
+    },
+    {
+      "asset": "brent",
+      "ticker": "BZ=F",
+      "name": "Brent Crude Futures",
+      "status": "ok",
+      "rows": 4664,
+      "start": "2007-07-30",
+      "end": "2026-04-27",
+      "csv": "/root/project/20260428-10gold/data/brent.csv",
+      "chart": "/root/project/20260428-10gold/charts/brent.png"
+    },
+    {
+      "asset": "gold",
+      "ticker": "GC=F",
+      "name": "Gold Futures",
+      "status": "ok",
+      "rows": 6437,
+      "start": "2000-08-30",
+      "end": "2026-04-27",
+      "csv": "/root/project/20260428-10gold/data/gold.csv",
+      "chart": "/root/project/20260428-10gold/charts/gold.png"
+    },
+    {
+      "asset": "eurusd",
+      "ticker": "EURUSD=X",
+      "name": "EUR/USD FX",
+      "status": "ok",
+      "rows": 5813,
+      "start": "2003-12-01",
+      "end": "2026-04-28",
+      "csv": "/root/project/20260428-10gold/data/eurusd.csv",
+      "chart": "/root/project/20260428-10gold/charts/eurusd.png"
+    },
+    {
+      "asset": "usdjpy",
+      "ticker": "JPY=X",
+      "name": "USD/JPY FX",
+      "status": "ok",
+      "rows": 7647,
+      "start": "1996-10-30",
+      "end": "2026-04-28",
+      "csv": "/root/project/20260428-10gold/data/usdjpy.csv",
+      "chart": "/root/project/20260428-10gold/charts/usdjpy.png"
+    },
+    {
+      "asset": "natgas",
+      "ticker": "NG=F",
+      "name": "Henry Hub Natural Gas Futures",
+      "status": "ok",
+      "rows": 6443,
+      "start": "2000-08-30",
+      "end": "2026-04-27",
+      "csv": "/root/project/20260428-10gold/data/natgas.csv",
+      "chart": "/root/project/20260428-10gold/charts/natgas.png"
+    },
+    {
+      "asset": "copper",
+      "ticker": "HG=F",
+      "name": "Copper Futures",
+      "status": "ok",
+      "rows": 6442,
+      "start": "2000-08-30",
+      "end": "2026-04-27",
+      "csv": "/root/project/20260428-10gold/data/copper.csv",
+      "chart": "/root/project/20260428-10gold/charts/copper.png"
+    },
+    {
+      "asset": "btc",
+      "ticker": "BTC-USD",
+      "name": "Bitcoin USD",
+      "status": "ok",
+      "rows": 4241,
+      "start": "2014-09-17",
+      "end": "2026-04-27",
+      "csv": "/root/project/20260428-10gold/data/btc.csv",
+      "chart": "/root/project/20260428-10gold/charts/btc.png"
+    }
+  ]
+}

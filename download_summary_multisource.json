@@ -1,0 +1,262 @@
+{
+  "requested_start": "1990-01-01",
+  "requested_end": "2026-04-28",
+  "generated_at_utc": "2026-04-28T13:05:34.031602Z",
+  "assets": [
+    {
+      "asset": "usd_dxy",
+      "name": "US Dollar Index (DXY)",
+      "selected_source": "yahoo",
+      "selected_symbol": "DX-Y.NYB",
+      "rows": 9255,
+      "start": "1990-01-01",
+      "end": "2026-04-27",
+      "csv": "/root/project/20260428-10gold/data_multisource/usd_dxy.csv",
+      "chart": "/root/project/20260428-10gold/charts_multisource/usd_dxy.png",
+      "tried": [
+        {
+          "source": "fred",
+          "symbol": "DTWEXBGS",
+          "status": "empty"
+        },
+        {
+          "source": "yahoo",
+          "symbol": "DX-Y.NYB",
+          "status": "ok",
+          "rows": 9255,
+          "start": "1990-01-01",
+          "end": "2026-04-27"
+        }
+      ]
+    },
+    {
+      "asset": "us10y_yield",
+      "name": "US 10Y Treasury Yield",
+      "selected_source": "yahoo",
+      "selected_symbol": "^TNX",
+      "rows": 9115,
+      "start": "1990-01-02",
+      "end": "2026-04-27",
+      "csv": "/root/project/20260428-10gold/data_multisource/us10y_yield.csv",
+      "chart": "/root/project/20260428-10gold/charts_multisource/us10y_yield.png",
+      "tried": [
+        {
+          "source": "fred",
+          "symbol": "DGS10",
+          "status": "empty"
+        },
+        {
+          "source": "yahoo",
+          "symbol": "^TNX",
+          "status": "ok",
+          "rows": 9115,
+          "start": "1990-01-02",
+          "end": "2026-04-27"
+        }
+      ]
+    },
+    {
+      "asset": "sp500",
+      "name": "S&P 500 Index",
+      "selected_source": "yahoo",
+      "selected_symbol": "^GSPC",
+      "rows": 9146,
+      "start": "1990-01-02",
+      "end": "2026-04-27",
+      "csv": "/root/project/20260428-10gold/data_multisource/sp500.csv",
+      "chart": "/root/project/20260428-10gold/charts_multisource/sp500.png",
+      "tried": [
+        {
+          "source": "fred",
+          "symbol": "SP500",
+          "status": "empty"
+        },
+        {
+          "source": "yahoo",
+          "symbol": "^GSPC",
+          "status": "ok",
+          "rows": 9146,
+          "start": "1990-01-02",
+          "end": "2026-04-27"
+        }
+      ]
+    },
+    {
+      "asset": "brent",
+      "name": "Brent Crude",
+      "selected_source": "yahoo",
+      "selected_symbol": "BZ=F",
+      "rows": 4664,
+      "start": "2007-07-30",
+      "end": "2026-04-27",
+      "csv": "/root/project/20260428-10gold/data_multisource/brent.csv",
+      "chart": "/root/project/20260428-10gold/charts_multisource/brent.png",
+      "tried": [
+        {
+          "source": "fred",
+          "symbol": "DCOILBRENTEU",
+          "status": "empty"
+        },
+        {
+          "source": "yahoo",
+          "symbol": "BZ=F",
+          "status": "ok",
+          "rows": 4664,
+          "start": "2007-07-30",
+          "end": "2026-04-27"
+        }
+      ]
+    },
+    {
+      "asset": "gold",
+      "name": "Gold",
+      "selected_source": "yahoo",
+      "selected_symbol": "GC=F",
+      "rows": 6437,
+      "start": "2000-08-30",
+      "end": "2026-04-27",
+      "csv": "/root/project/20260428-10gold/data_multisource/gold.csv",
+      "chart": "/root/project/20260428-10gold/charts_multisource/gold.png",
+      "tried": [
+        {
+          "source": "fred",
+          "symbol": "GOLDAMGBD228NLBM",
+          "status": "error: HTTPError: HTTP Error 404: Not Found"
+        },
+        {
+          "source": "yahoo",
+          "symbol": "GC=F",
+          "status": "ok",
+          "rows": 6437,
+          "start": "2000-08-30",
+          "end": "2026-04-27"
+        }
+      ]
+    },
+    {
+      "asset": "eurusd",
+      "name": "EUR/USD",
+      "selected_source": "yahoo",
+      "selected_symbol": "EURUSD=X",
+      "rows": 5812,
+      "start": "2003-12-01",
+      "end": "2026-04-27",
+      "csv": "/root/project/20260428-10gold/data_multisource/eurusd.csv",
+      "chart": "/root/project/20260428-10gold/charts_multisource/eurusd.png",
+      "tried": [
+        {
+          "source": "fred",
+          "symbol": "DEXUSEU",
+          "status": "empty"
+        },
+        {
+          "source": "yahoo",
+          "symbol": "EURUSD=X",
+          "status": "ok",
+          "rows": 5812,
+          "start": "2003-12-01",
+          "end": "2026-04-27"
+        }
+      ]
+    },
+    {
+      "asset": "usdjpy",
+      "name": "USD/JPY",
+      "selected_source": "yahoo",
+      "selected_symbol": "JPY=X",
+      "rows": 7646,
+      "start": "1996-10-30",
+      "end": "2026-04-27",
+      "csv": "/root/project/20260428-10gold/data_multisource/usdjpy.csv",
+      "chart": "/root/project/20260428-10gold/charts_multisource/usdjpy.png",
+      "tried": [
+        {
+          "source": "fred",
+          "symbol": "DEXJPUS",
+          "status": "empty"
+        },
+        {
+          "source": "yahoo",
+          "symbol": "JPY=X",
+          "status": "ok",
+          "rows": 7646,
+          "start": "1996-10-30",
+          "end": "2026-04-27"
+        }
+      ]
+    },
+    {
+      "asset": "natgas",
+      "name": "Natural Gas (Henry Hub proxy)",
+      "selected_source": "yahoo",
+      "selected_symbol": "NG=F",
+      "rows": 6443,
+      "start": "2000-08-30",
+      "end": "2026-04-27",
+      "csv": "/root/project/20260428-10gold/data_multisource/natgas.csv",
+      "chart": "/root/project/20260428-10gold/charts_multisource/natgas.png",
+      "tried": [
+        {
+          "source": "fred",
+          "symbol": "DHHNGSP",
+          "status": "empty"
+        },
+        {
+          "source": "yahoo",
+          "symbol": "NG=F",
+          "status": "ok",
+          "rows": 6443,
+          "start": "2000-08-30",
+          "end": "2026-04-27"
+        }
+      ]
+    },
+    {
+      "asset": "copper",
+      "name": "Copper",
+      "selected_source": "yahoo",
+      "selected_symbol": "HG=F",
+      "rows": 6442,
+      "start": "2000-08-30",
+      "end": "2026-04-27",
+      "csv": "/root/project/20260428-10gold/data_multisource/copper.csv",
+      "chart": "/root/project/20260428-10gold/charts_multisource/copper.png",
+      "tried": [
+        {
+          "source": "fred",
+          "symbol": "PCOPPUSDM",
+          "status": "empty"
+        },
+        {
+          "source": "yahoo",
+          "symbol": "HG=F",
+          "status": "ok",
+          "rows": 6442,
+          "start": "2000-08-30",
+          "end": "2026-04-27"
+        }
+      ]
+    },
+    {
+      "asset": "btc",
+      "name": "Bitcoin USD",
+      "selected_source": "yahoo",
+      "selected_symbol": "BTC-USD",
+      "rows": 4241,
+      "start": "2014-09-17",
+      "end": "2026-04-27",
+      "csv": "/root/project/20260428-10gold/data_multisource/btc.csv",
+      "chart": "/root/project/20260428-10gold/charts_multisource/btc.png",
+      "tried": [
+        {
+          "source": "yahoo",
+          "symbol": "BTC-USD",
+          "status": "ok",
+          "rows": 4241,
+          "start": "2014-09-17",
+          "end": "2026-04-27"
+        }
+      ]
+    }
+  ]
+}
