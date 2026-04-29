@@ -65,21 +65,52 @@ function computeSignals(cfg){
   const mf = rollingMean(close, cfg.fast);
   const ms = rollingMean(close, cfg.slow);
   const mt = cfg.trend ? rollingMean(close, cfg.trend) : null;
-  const longs = [], shorts = [];
+
+  // Execute-style signal simulation (same spirit as backtest):
+  // states: -1 short, 0 flat, +1 long
+  // enforce: no consecutive same-side opens
+  // flip allowed same day but must be close then open
+  let pos = 0;
+  let pending = 0;
+  let lastOpenDir = 0;
+
+  const longs = [];
+  const shorts = [];
+
   for(let i=1;i<close.length;i++){
-    if(mf[i-1]==null || mf[i]==null || ms[i-1]==null || ms[i]==null) continue;
+    // execute pending first at today's close
+    if(pending !== pos){
+      if(pos !== 0){
+        pos = 0; // close existing first
+      }
+      if(pending !== 0 && pending !== lastOpenDir){
+        pos = pending;
+        lastOpenDir = pending;
+        if(pos === 1) longs.push({x:dates[i], y:close[i]});
+        if(pos === -1) shorts.push({x:dates[i], y:close[i]});
+      }
+    }
+
+    // produce today's new pending from crossover/trend rule
+    if(mf[i-1]==null || mf[i]==null || ms[i-1]==null || ms[i]==null){
+      continue;
+    }
+
     const bullCross = (mf[i-1] <= ms[i-1] && mf[i] > ms[i]);
     const bearCross = (mf[i-1] >= ms[i-1] && mf[i] < ms[i]);
     let longOK = bullCross;
     let shortOK = bearCross;
+
     if(cfg.type==='sym_trend' && mt){
       if(mt[i]==null) continue;
       longOK = longOK && (close[i] > mt[i]);
       shortOK = shortOK && (close[i] < mt[i]);
     }
-    if(longOK) longs.push({x:dates[i], y:close[i]});
-    if(shortOK) shorts.push({x:dates[i], y:close[i]});
+
+    if(longOK) pending = 1;
+    else if(shortOK) pending = -1;
   }
+
   return {longs, shorts, startDate};
 }
 
