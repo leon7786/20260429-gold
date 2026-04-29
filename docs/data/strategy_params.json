@@ -1,22 +1,38 @@
 {
-  "btc_best_dual_side_ma_1_700_t1_realistic_summary": {
+  "v1": {
     "type": "sym",
     "fast": 1,
     "slow": 39,
-    "label": "BTC sym 1/39 (T+1+实盘6变量)"
+    "label": "v1-sym 1/39 (T+1+实盘6变量)",
+    "source_strategy": "btc_best_dual_side_ma_1_700_t1_realistic_summary"
   },
-  "btc_strategy_hunt_realistic_t1_v3_summary": {
+  "v2": {
+    "type": "sym_trend",
+    "fast": 5,
+    "slow": 60,
+    "trend": 100,
+    "label": "v2-sym_trend 5/60 + trend100",
+    "source_strategy": "btc_strategy_hunt_realistic_t1_v2_summary"
+  },
+  "v3": {
     "type": "sym_trend",
     "fast": 3,
     "slow": 55,
     "trend": 80,
-    "label": "BTC sym_trend 3/55 + trend 80"
+    "label": "v3-sym_trend 3/55 + trend80"
   },
-  "btc_sym_trend_fast1_20_slow30_100_trend40_200_summary": {
+  "v4": {
+    "type": "sym_trend",
+    "fast": 8,
+    "slow": 60,
+    "trend": 90,
+    "label": "v4-sym_trend 8/60 + trend90"
+  },
+  "v5": {
     "type": "sym_trend",
     "fast": 14,
     "slow": 42,
     "trend": 93,
-    "label": "BTC sym_trend 14/42 + trend 93"
+    "label": "v5-sym_trend 14/42 + trend93 (latest)"
   }
 }

@@ -106,19 +106,30 @@ function drawChart(cfgKey){
 
 function renderFilters(){
   const assets=uniq(data.map(x=>x.asset));
-  const strats=uniq(data.map(x=>x.strategy));
+  const strats=uniq(Object.keys(strategyParams)); // only show v1..vN strategies with signal definitions
   assetWrap.innerHTML=''; stratWrap.innerHTML='';
   assetWrap.appendChild(mkBtn('全部', asset==='ALL', ()=>{asset='ALL'; render(); renderFilters(); drawChart(null);}));
   assets.forEach(a=>assetWrap.appendChild(mkBtn(a, asset===a, ()=>{asset=a; render(); renderFilters(); if(a!=='btc') drawChart(null);} )));
 
   stratWrap.appendChild(mkBtn('全部', strat==='ALL', ()=>{strat='ALL'; render(); renderFilters(); drawChart(null);}));
-  strats.forEach(s=>stratWrap.appendChild(mkBtn(s, strat===s, ()=>{strat=s; render(); renderFilters(); drawChart(s);}));
+  strats.forEach(s=>{
+    const txt = (strategyParams[s] && strategyParams[s].label) ? strategyParams[s].label : s;
+    stratWrap.appendChild(mkBtn(txt, strat===s, ()=>{strat=s; render(); renderFilters(); drawChart(s);}));
+  });
 }
 
 function render(){
   const kw=q.value.trim().toLowerCase();
-  const rows=data.filter(r=>(asset==='ALL'||r.asset===asset)&&(strat==='ALL'||r.strategy===strat)&&(!kw||JSON.stringify(r).toLowerCase().includes(kw)));
-  tb.innerHTML=rows.map(r=>`<tr><td>${r.asset}</td><td>${r.strategy}</td><td>${fmt(r.return_pct)}</td><td>${r.source_file}</td></tr>`).join('');
+  const rows=data.filter(r=>{
+    const strategyName = (strategyParams[r.strategy] && strategyParams[r.strategy].label) ? strategyParams[r.strategy].label : r.strategy;
+    return (asset==='ALL'||r.asset===asset)
+      && (strat==='ALL'||r.strategy===strat)
+      && (!kw||JSON.stringify({...r, strategyName}).toLowerCase().includes(kw));
+  });
+  tb.innerHTML=rows.map(r=>{
+    const strategyName = (strategyParams[r.strategy] && strategyParams[r.strategy].label) ? strategyParams[r.strategy].label : r.strategy;
+    return `<tr><td>${r.asset}</td><td>${strategyName}</td><td>${fmt(r.return_pct)}</td><td>${r.source_file}</td></tr>`;
+  }).join('');
   meta.textContent=`展示 ${rows.length} / ${data.length} 条`;
 }
 q.addEventListener('input', render);
