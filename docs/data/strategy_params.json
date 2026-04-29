@@ -4,7 +4,8 @@
     "fast": 1,
     "slow": 39,
     "label": "v1-sym 1/39 (T+1+实盘6变量)",
-    "source_strategy": "btc_best_dual_side_ma_1_700_t1_realistic_summary"
+    "source_strategy": "btc_best_dual_side_ma_1_700_t1_realistic_summary",
+    "start_date": "2017-11-01"
   },
   "v2": {
     "type": "sym_trend",
@@ -12,28 +13,32 @@
     "slow": 60,
     "trend": 100,
     "label": "v2-sym_trend 5/60 + trend100",
-    "source_strategy": "btc_strategy_hunt_realistic_t1_v2_summary"
+    "source_strategy": "btc_strategy_hunt_realistic_t1_v2_summary",
+    "start_date": "2017-11-01"
   },
   "v3": {
     "type": "sym_trend",
     "fast": 3,
     "slow": 55,
     "trend": 80,
-    "label": "v3-sym_trend 3/55 + trend80"
+    "label": "v3-sym_trend 3/55 + trend80",
+    "start_date": "2017-11-01"
   },
   "v4": {
     "type": "sym_trend",
     "fast": 8,
     "slow": 60,
     "trend": 90,
-    "label": "v4-sym_trend 8/60 + trend90"
+    "label": "v4-sym_trend 8/60 + trend90",
+    "start_date": "2017-11-01"
   },
   "v5": {
     "type": "sym_trend",
     "fast": 14,
     "slow": 42,
     "trend": 93,
-    "label": "v5-sym_trend 14/42 + trend93 (latest)"
+    "label": "v5-sym_trend 14/42 + trend93 (latest)",
+    "start_date": "2017-11-01"
   },
   "v6": {
     "type": "sym_trend",

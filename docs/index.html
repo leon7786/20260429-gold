@@ -23,7 +23,7 @@ th{background:#1a2758;position:sticky;top:0}
 <h1>20260429-gold · 回测策略看板</h1>
 
 <div class='panel'>
-  <div><b>BTC 全部走势曲线（默认）</b></div>
+  <div><b>BTC 走势曲线（固定起点 2017-11-01）</b></div>
   <div id='chart' style='margin-top:8px'></div>
   <div class='muted' id='signalMeta'>未选择策略标记</div>
 </div>
@@ -115,7 +115,8 @@ function computeSignals(cfg){
 }
 
 function drawChart(cfgKey){
-  const x = btc.map(d=>d.date), y = btc.map(d=>d.close);
+  const btcView = btc.filter(d => d.date >= '2017-11-01');
+  const x = btcView.map(d=>d.date), y = btcView.map(d=>d.close);
   const traces = [{x, y, type:'scatter', mode:'lines', name:'BTC Close', line:{color:'#9bb8ff', width:1.6}}];
 
   if(cfgKey && strategyParams[cfgKey]){
@@ -178,7 +179,7 @@ Promise.all([
   strategyParams = sp||{};
   renderFilters();
   render();
-  drawChart(null); // default BTC full curve only
+  drawChart(null); // default BTC curve
 }).catch(e=>{
   meta.textContent='加载失败: '+e;
 });

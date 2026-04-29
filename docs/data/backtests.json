@@ -3,32 +3,32 @@
     {
       "asset": "btc",
       "strategy": "v1",
-      "return_pct": 214435.94152030296,
-      "source_file": "btc_best_dual_side_ma_1_700_t1_realistic_summary.csv"
+      "return_pct": 7933.263712557833,
+      "source_file": "btc_retest_v1_v5_20171101_alt_rule.csv"
     },
     {
       "asset": "btc",
       "strategy": "v2",
-      "return_pct": 314828.56311261526,
-      "source_file": "btc_strategy_hunt_realistic_t1_v2_summary.csv"
+      "return_pct": 9102.493783024229,
+      "source_file": "btc_retest_v1_v5_20171101_alt_rule.csv"
     },
     {
       "asset": "btc",
       "strategy": "v3",
-      "return_pct": 377173.18619357,
-      "source_file": "btc_strategy_hunt_realistic_t1_v3_summary.csv"
+      "return_pct": 9160.503268611534,
+      "source_file": "btc_retest_v1_v5_20171101_alt_rule.csv"
     },
     {
       "asset": "btc",
       "strategy": "v4",
-      "return_pct": 374423.2899699999,
-      "source_file": "btc_strategy_hunt_realistic_t1_v3_all.csv(top row #2)"
+      "return_pct": 6524.037903250438,
+      "source_file": "btc_retest_v1_v5_20171101_alt_rule.csv"
     },
     {
       "asset": "btc",
       "strategy": "v5",
-      "return_pct": 1545751.3485556848,
-      "source_file": "btc_sym_trend_fast1_20_slow30_100_trend40_200_summary.csv"
+      "return_pct": 46597.65168964702,
+      "source_file": "btc_retest_v1_v5_20171101_alt_rule.csv"
     },
     {
       "asset": "btc",
