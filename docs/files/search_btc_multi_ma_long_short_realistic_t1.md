@@ -1,16 +1,15 @@
 # search_btc_multi_ma_long_short_realistic_t1.py
 
 - **Category**: backtest
-- **Path**: `search_btc_multi_ma_long_short_realistic_t1.py`
+- **Path**: `backtests/search_btc_multi_ma_long_short_realistic_t1.py`
 
 ## Purpose
-Auto-generated file note. This script is part of the **20260429-gold** research toolkit.
+This script belongs to project `20260429-gold`.
 
-## How to run
+## Run
 ```bash
-python search_btc_multi_ma_long_short_realistic_t1.py
+python backtests/search_btc_multi_ma_long_short_realistic_t1.py
 ```
 
 ## Notes
-- Uses local CSV data files under `data/` and/or generated outputs under `backtest_results/`.
-- Check script headers/variables for parameter ranges and execution assumptions (T+1, fees, slippage, spread, short carry).
+- Realistic runs use T+1 + fee/slippage/spread/short-carry assumptions where defined in script.

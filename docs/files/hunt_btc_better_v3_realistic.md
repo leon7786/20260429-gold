@@ -1,16 +1,15 @@
 # hunt_btc_better_v3_realistic.py
 
 - **Category**: backtest
-- **Path**: `hunt_btc_better_v3_realistic.py`
+- **Path**: `backtests/hunt_btc_better_v3_realistic.py`
 
 ## Purpose
-Auto-generated file note. This script is part of the **20260429-gold** research toolkit.
+This script belongs to project `20260429-gold`.
 
-## How to run
+## Run
 ```bash
-python hunt_btc_better_v3_realistic.py
+python backtests/hunt_btc_better_v3_realistic.py
 ```
 
 ## Notes
-- Uses local CSV data files under `data/` and/or generated outputs under `backtest_results/`.
-- Check script headers/variables for parameter ranges and execution assumptions (T+1, fees, slippage, spread, short carry).
+- Realistic runs use T+1 + fee/slippage/spread/short-carry assumptions where defined in script.
