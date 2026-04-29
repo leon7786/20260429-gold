@@ -29,6 +29,12 @@
       "strategy": "v5",
       "return_pct": 1545751.3485556848,
       "source_file": "btc_sym_trend_fast1_20_slow30_100_trend40_200_summary.csv"
+    },
+    {
+      "asset": "btc",
+      "strategy": "v6",
+      "return_pct": 52316.446865568614,
+      "source_file": "btc_201711_alt_only_sym_trend_summary.csv"
     }
   ]
 }

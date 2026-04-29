@@ -34,5 +34,13 @@
     "slow": 42,
     "trend": 93,
     "label": "v5-sym_trend 14/42 + trend93 (latest)"
+  },
+  "v6": {
+    "type": "sym_trend",
+    "fast": 21,
+    "slow": 35,
+    "trend": 100,
+    "label": "v6-sym_trend 21/35 + trend100 (2017-11, alt-rule)",
+    "source_strategy": "btc_201711_alt_only_sym_trend_summary"
   }
 }
