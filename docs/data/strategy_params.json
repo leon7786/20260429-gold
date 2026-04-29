@@ -40,6 +40,7 @@
     "fast": 21,
     "slow": 35,
     "trend": 100,
+    "start_date": "2017-11-01",
     "label": "v6-sym_trend 21/35 + trend100 (2017-11, alt-rule)",
     "source_strategy": "btc_201711_alt_only_sym_trend_summary"
   }

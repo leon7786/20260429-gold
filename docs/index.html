@@ -58,8 +58,10 @@ function rollingMean(arr, w){
 }
 
 function computeSignals(cfg){
-  const close = btc.map(x=>x.close);
-  const dates = btc.map(x=>x.date);
+  const startDate = cfg.start_date || null;
+  const filtered = startDate ? btc.filter(x => x.date >= startDate) : btc;
+  const close = filtered.map(x=>x.close);
+  const dates = filtered.map(x=>x.date);
   const mf = rollingMean(close, cfg.fast);
   const ms = rollingMean(close, cfg.slow);
   const mt = cfg.trend ? rollingMean(close, cfg.trend) : null;
@@ -78,7 +80,7 @@ function computeSignals(cfg){
     if(longOK) longs.push({x:dates[i], y:close[i]});
     if(shortOK) shorts.push({x:dates[i], y:close[i]});
   }
-  return {longs, shorts};
+  return {longs, shorts, startDate};
 }
 
 function drawChart(cfgKey){
@@ -87,10 +89,11 @@ function drawChart(cfgKey){
 
   if(cfgKey && strategyParams[cfgKey]){
     const cfg = strategyParams[cfgKey];
-    const {longs, shorts} = computeSignals(cfg);
+    const {longs, shorts, startDate} = computeSignals(cfg);
     traces.push({x: longs.map(p=>p.x), y: longs.map(p=>p.y), type:'scatter', mode:'markers', name:'做多点', marker:{color:'#18d26e', size:6, symbol:'triangle-up'}});
     traces.push({x: shorts.map(p=>p.x), y: shorts.map(p=>p.y), type:'scatter', mode:'markers', name:'做空点', marker:{color:'#ff5d6c', size:6, symbol:'triangle-down'}});
-    signalMeta.textContent = `当前标记策略: ${cfg.label} ｜ 做多点 ${longs.length} ｜ 做空点 ${shorts.length}`;
+    const rangeTxt = startDate ? ` ｜ 信号起点 ${startDate}` : '';
+    signalMeta.textContent = `当前标记策略: ${cfg.label}${rangeTxt} ｜ 做多点 ${longs.length} ｜ 做空点 ${shorts.length}`;
   } else {
     signalMeta.textContent = '未选择策略标记（当前仅展示BTC全走势）';
   }
