@@ -21,6 +21,10 @@ data_long_history/
 data_multisource/
 alt_sources/
 
+# keep Pages data snapshots tracked
+!docs/data/
+!docs/data/*.json
+
 # Jupyter
 .ipynb_checkpoints/
 

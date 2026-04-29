@@ -3,6 +3,7 @@
 <head>
 <meta charset='UTF-8'/><meta name='viewport' content='width=device-width,initial-scale=1'/>
 <title>20260429-gold 回测看板</title>
+<script src='https://cdn.plot.ly/plotly-2.35.2.min.js'></script>
 <style>
 body{margin:14px;background:#0b1020;color:#eaf0ff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'PingFang SC','Microsoft YaHei',sans-serif}
 h1{font-size:20px;margin:0 0 8px}
@@ -15,31 +16,105 @@ table{width:100%;border-collapse:collapse;background:#121a3b;border-radius:10px;
 th,td{padding:7px 8px;border-bottom:1px solid #2a3768;text-align:left;font-size:12px}
 th{background:#1a2758;position:sticky;top:0}
 .muted{opacity:.8;font-size:12px;margin:6px 0}
+#chart{height:460px}
 </style>
 </head>
 <body>
 <h1>20260429-gold · 回测策略看板</h1>
+
+<div class='panel'>
+  <div><b>BTC 全部走势曲线（默认）</b></div>
+  <div id='chart' style='margin-top:8px'></div>
+  <div class='muted' id='signalMeta'>未选择策略标记</div>
+</div>
+
 <div class='panel'><div><b>回测品种</b></div><div id='assetBtns' class='row' style='margin-top:6px'></div></div>
 <div class='panel'><div><b>策略</b></div><div id='stratBtns' class='row' style='margin-top:6px'></div></div>
 <div class='panel'><input id='q' placeholder='搜索（文件名/策略关键字）'></div>
 <div class='muted' id='meta'>Loading...</div>
-<div style='max-height:70vh;overflow:auto'><table><thead><tr><th>品种</th><th>策略</th><th>收益率%</th><th>来源文件</th></tr></thead><tbody id='tb'></tbody></table></div>
+<div style='max-height:55vh;overflow:auto'><table><thead><tr><th>品种</th><th>策略</th><th>收益率%</th><th>来源文件</th></tr></thead><tbody id='tb'></tbody></table></div>
+
 <script>
-let data=[]; let asset='ALL'; let strat='ALL';
+let data=[]; let asset='btc'; let strat='ALL';
+let btc=[]; let strategyParams={};
 const tb=document.getElementById('tb'), meta=document.getElementById('meta'), q=document.getElementById('q');
 const assetWrap=document.getElementById('assetBtns'), stratWrap=document.getElementById('stratBtns');
+const signalMeta=document.getElementById('signalMeta');
+
 const uniq=a=>[...new Set(a)].filter(Boolean).sort();
 const fmt=v=> (v===null||v===undefined||Number.isNaN(v))?'-':Number(v).toLocaleString(undefined,{maximumFractionDigits:2});
 function mkBtn(text, active, onClick){const b=document.createElement('button');b.className='btn'+(active?' active':'');b.textContent=text;b.onclick=onClick;return b;}
+
+function rollingMean(arr, w){
+  const out = Array(arr.length).fill(null);
+  if(w<=0 || w>arr.length) return out;
+  let s=0;
+  for(let i=0;i<arr.length;i++){
+    s += arr[i];
+    if(i>=w) s -= arr[i-w];
+    if(i>=w-1) out[i] = s/w;
+  }
+  return out;
+}
+
+function computeSignals(cfg){
+  const close = btc.map(x=>x.close);
+  const dates = btc.map(x=>x.date);
+  const mf = rollingMean(close, cfg.fast);
+  const ms = rollingMean(close, cfg.slow);
+  const mt = cfg.trend ? rollingMean(close, cfg.trend) : null;
+  const longs = [], shorts = [];
+  for(let i=1;i<close.length;i++){
+    if(mf[i-1]==null || mf[i]==null || ms[i-1]==null || ms[i]==null) continue;
+    const bullCross = (mf[i-1] <= ms[i-1] && mf[i] > ms[i]);
+    const bearCross = (mf[i-1] >= ms[i-1] && mf[i] < ms[i]);
+    let longOK = bullCross;
+    let shortOK = bearCross;
+    if(cfg.type==='sym_trend' && mt){
+      if(mt[i]==null) continue;
+      longOK = longOK && (close[i] > mt[i]);
+      shortOK = shortOK && (close[i] < mt[i]);
+    }
+    if(longOK) longs.push({x:dates[i], y:close[i]});
+    if(shortOK) shorts.push({x:dates[i], y:close[i]});
+  }
+  return {longs, shorts};
+}
+
+function drawChart(cfgKey){
+  const x = btc.map(d=>d.date), y = btc.map(d=>d.close);
+  const traces = [{x, y, type:'scatter', mode:'lines', name:'BTC Close', line:{color:'#9bb8ff', width:1.6}}];
+
+  if(cfgKey && strategyParams[cfgKey]){
+    const cfg = strategyParams[cfgKey];
+    const {longs, shorts} = computeSignals(cfg);
+    traces.push({x: longs.map(p=>p.x), y: longs.map(p=>p.y), type:'scatter', mode:'markers', name:'做多点', marker:{color:'#18d26e', size:6, symbol:'triangle-up'}});
+    traces.push({x: shorts.map(p=>p.x), y: shorts.map(p=>p.y), type:'scatter', mode:'markers', name:'做空点', marker:{color:'#ff5d6c', size:6, symbol:'triangle-down'}});
+    signalMeta.textContent = `当前标记策略: ${cfg.label} ｜ 做多点 ${longs.length} ｜ 做空点 ${shorts.length}`;
+  } else {
+    signalMeta.textContent = '未选择策略标记（当前仅展示BTC全走势）';
+  }
+
+  Plotly.newPlot('chart', traces, {
+    paper_bgcolor:'#131b3b', plot_bgcolor:'#101833',
+    margin:{l:45,r:15,t:10,b:40},
+    xaxis:{color:'#cfd8ff', gridcolor:'#25315f'},
+    yaxis:{color:'#cfd8ff', gridcolor:'#25315f'},
+    legend:{orientation:'h', y:1.12, x:0, font:{color:'#dfe8ff'}},
+  }, {responsive:true, displaylogo:false});
+}
+
 function renderFilters(){
   const assets=uniq(data.map(x=>x.asset));
   const strats=uniq(data.map(x=>x.strategy));
   assetWrap.innerHTML=''; stratWrap.innerHTML='';
-  assetWrap.appendChild(mkBtn('全部', asset==='ALL', ()=>{asset='ALL'; render(); renderFilters();}));
-  assets.forEach(a=>assetWrap.appendChild(mkBtn(a, asset===a, ()=>{asset=a; render(); renderFilters();})));
-  stratWrap.appendChild(mkBtn('全部', strat==='ALL', ()=>{strat='ALL'; render(); renderFilters();}));
-  strats.forEach(s=>stratWrap.appendChild(mkBtn(s, strat===s, ()=>{strat=s; render(); renderFilters();})));
+  assetWrap.appendChild(mkBtn('全部', asset==='ALL', ()=>{asset='ALL'; render(); renderFilters(); drawChart(null);}));
+  assets.forEach(a=>assetWrap.appendChild(mkBtn(a, asset===a, ()=>{asset=a; render(); renderFilters(); if(a!=='btc') drawChart(null);} )));
+
+  stratWrap.appendChild(mkBtn('全部', strat==='ALL', ()=>{strat='ALL'; render(); renderFilters(); drawChart(null);}));
+  strats.forEach(s=>stratWrap.appendChild(mkBtn(s, strat===s, ()=>{strat=s; render(); renderFilters(); drawChart(s);}));
 }
+
 function render(){
   const kw=q.value.trim().toLowerCase();
   const rows=data.filter(r=>(asset==='ALL'||r.asset===asset)&&(strat==='ALL'||r.strategy===strat)&&(!kw||JSON.stringify(r).toLowerCase().includes(kw)));
@@ -47,6 +122,20 @@ function render(){
   meta.textContent=`展示 ${rows.length} / ${data.length} 条`;
 }
 q.addEventListener('input', render);
-fetch('./data/backtests.json').then(r=>r.json()).then(j=>{data=j.items||[]; renderFilters(); render();}).catch(e=>{meta.textContent='加载失败: '+e;});
+
+Promise.all([
+  fetch('./data/backtests.json').then(r=>r.json()),
+  fetch('./data/btc_price.json').then(r=>r.json()),
+  fetch('./data/strategy_params.json').then(r=>r.json())
+]).then(([bt, px, sp])=>{
+  data = bt.items||[];
+  btc = px.items||[];
+  strategyParams = sp||{};
+  renderFilters();
+  render();
+  drawChart(null); // default BTC full curve only
+}).catch(e=>{
+  meta.textContent='加载失败: '+e;
+});
 </script>
 </body></html>

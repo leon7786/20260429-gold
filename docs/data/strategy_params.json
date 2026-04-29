@@ -1,0 +1,22 @@
+{
+  "btc_best_dual_side_ma_1_700_t1_realistic_summary": {
+    "type": "sym",
+    "fast": 1,
+    "slow": 39,
+    "label": "BTC sym 1/39 (T+1+实盘6变量)"
+  },
+  "btc_strategy_hunt_realistic_t1_v3_summary": {
+    "type": "sym_trend",
+    "fast": 3,
+    "slow": 55,
+    "trend": 80,
+    "label": "BTC sym_trend 3/55 + trend 80"
+  },
+  "btc_sym_trend_fast1_20_slow30_100_trend40_200_summary": {
+    "type": "sym_trend",
+    "fast": 14,
+    "slow": 42,
+    "trend": 93,
+    "label": "BTC sym_trend 14/42 + trend 93"
+  }
+}
